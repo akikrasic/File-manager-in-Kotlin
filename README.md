@@ -1,0 +1,1 @@
+The idea of this application is to search in multiple directories in the same time, when you enter query for search. Also you can change directories. The default directories are added in the file which is currently pointing to /home/aki/ directory so you can change this in code to your path and it will work.
