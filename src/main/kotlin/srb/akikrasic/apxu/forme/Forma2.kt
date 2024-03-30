@@ -20,6 +20,15 @@ class Forma2: FormaZajednicka(), PromenaJezika {
 
     override fun vratiteMapu(): Map<String, String>  = JezikServis.odabraniJezik().forma2()
 
+    private fun  napraviteJSplitPane(sirinaPanea:Int):JSplitPane{
+        val pane = JSplitPane()
+        pane.isOneTouchExpandable = true
+        pane.dividerLocation= sirinaPanea
+
+        return pane
+    }
+
+
     init{
         //ajde pisem sve opet cisto da se podsetim iako vec imam taj kod skoro sve
         this.defaultCloseOperation= JFrame.EXIT_ON_CLOSE
@@ -40,12 +49,48 @@ class Forma2: FormaZajednicka(), PromenaJezika {
         c.weighty=0.8
         c.gridy=1
         c.fill = GridBagConstraints.BOTH
-        c.weightx= 1.0/noviPrikaziDirektorijumaLista.size
-        noviPrikaziDirektorijumaLista.forEach{
-            contentPane.add(it, c)
-            c.gridx++
+        //c.weightx= 1.0/noviPrikaziDirektorijumaLista.size
+        c.weightx = 1.0
+//        noviPrikaziDirektorijumaLista.forEach{
+//            contentPane.add(it, c)
+//            c.gridx++
+//        }
+
+        postaviteContentPane(c, sirina)
+
+    }
+
+
+
+    fun postaviteContentPane(c:GridBagConstraints, sirina:Int){
+        val brojDirektorijuma = noviPrikaziDirektorijumaLista.size
+        val sirinaPanea = sirina/brojDirektorijuma
+        val firstPane = napraviteJSplitPane(sirinaPanea)
+        var currentPane = firstPane
+
+        when(brojDirektorijuma){
+             1->{
+                 contentPane.add(noviPrikaziDirektorijumaLista[0], c)
+                 return
+             }
+            2->{
+                firstPane.leftComponent = noviPrikaziDirektorijumaLista[0]
+                firstPane.rightComponent = noviPrikaziDirektorijumaLista[1]
+            }
+            else->{
+                for( i in 0.. noviPrikaziDirektorijumaLista.lastIndex-2){
+                    currentPane.leftComponent = noviPrikaziDirektorijumaLista[i]
+                    val noviSplitPane = napraviteJSplitPane(sirinaPanea)
+                    currentPane.rightComponent = noviSplitPane
+                    currentPane = noviSplitPane
+                }
+                currentPane.leftComponent = noviPrikaziDirektorijumaLista[noviPrikaziDirektorijumaLista.lastIndex-1]
+                currentPane.rightComponent = noviPrikaziDirektorijumaLista[noviPrikaziDirektorijumaLista.lastIndex]
+            }
         }
 
+
+        contentPane.add(firstPane, c)
     }
     fun pretraga(zaPretragu:String){
 
