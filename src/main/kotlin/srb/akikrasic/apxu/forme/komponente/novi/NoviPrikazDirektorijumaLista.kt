@@ -3,10 +3,7 @@ package srb.akikrasic.apxu.forme.komponente.novi
 import srb.akikrasic.apxu.forme.Forma2
 import srb.akikrasic.apxu.forme.komponente.ListaModel
 import srb.akikrasic.apxu.forme.komponente.ListaRenderer
-import java.awt.Desktop
-import java.awt.GridBagConstraints
-import java.awt.GridBagLayout
-import java.awt.Insets
+import java.awt.*
 import java.awt.event.ActionListener
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
@@ -39,15 +36,33 @@ class NoviPrikazDirektorijumaLista(val forma: Forma2, var putanja:String = "/") 
         lista.addMouseListener(object: MouseListener {
 
             override fun mouseClicked(e: MouseEvent?) {
+
                 if(e?.clickCount==2) {
                     odabranJeFajlIzListe(lista.selectedValue ?: File("/"))
+                    return
                 }
+
             }
 
             override fun mousePressed(e: MouseEvent?) {
+
+                if( e?.isPopupTrigger?:false){
+
+                    val menu = JPopupMenu()
+                    val item = JMenuItem("Додајте")
+                    val el = lista.model.getElementAt(lista.locationToIndex(Point(e?.x?:0, e?.y?:0)))
+                    menu.add(item)
+                    item.addActionListener{event->
+                        forma.dodajteNoviDirektorijum(el.absolutePath)
+                    }
+                    if( el.isDirectory) {
+                        menu.show(lista, e?.x ?: 0, e?.y ?: 0)
+                    }
+                }
             }
 
             override fun mouseReleased(e: MouseEvent?) {
+
             }
 
             override fun mouseEntered(e: MouseEvent?) {
@@ -88,7 +103,6 @@ class NoviPrikazDirektorijumaLista(val forma: Forma2, var putanja:String = "/") 
     private fun iditeNazad(){
         postaviteListuFajlovaUListuZaPrikaz( kretanjeKrozDirektorijum.vratiteSeNaPrethodniDirektorijumIVratiteMuFajlove(forma.izvuciteStringZaPretragu()) )
     }
-
     fun pretraga(zaPretragu:String){
         postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.pretrazite(zaPretragu))
     }

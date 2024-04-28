@@ -7,34 +7,34 @@ import srb.akikrasic.apxu.forme.komponente.novi.NoviPanelZaPretragu
 import srb.akikrasic.apxu.forme.komponente.novi.NoviPrikazDirektorijumaLista
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
-import javax.swing.JFrame
-import javax.swing.JSplitPane
+import java.awt.GridBagLayoutInfo
+import java.awt.JobAttributes.DialogType
+import java.io.File
+import javax.swing.*
+import javax.swing.filechooser.FileFilter
+import javax.swing.filechooser.FileView
 
 class Forma2: FormaZajednicka(), PromenaJezika {
 
     val noviPanelZaPretragu = NoviPanelZaPretragu(this)
-    val noviPrikaziDirektorijumaLista = PocetnePutanje.vratitePocetnePutanje().map { NoviPrikazDirektorijumaLista(this, it) }
+    val noviPrikaziDirektorijumaLista = mutableListOf<NoviPrikazDirektorijumaLista>()
+    val panelZaSplitPaneove = JPanel()
+    var sirina = 0
     override fun ucitajteJezikUPanel(mapa: Map<String, String>) {
         title=mapa["naslov"]
     }
 
     override fun vratiteMapu(): Map<String, String>  = JezikServis.odabraniJezik().forma2()
 
-    private fun  napraviteJSplitPane(sirinaPanea:Int):JSplitPane{
-        val pane = JSplitPane()
-        pane.isOneTouchExpandable = true
-        pane.dividerLocation= sirinaPanea
-
-        return pane
-    }
-
 
     init{
+
+        noviPrikaziDirektorijumaLista.addAll(PocetnePutanje.vratitePocetnePutanje().map { NoviPrikazDirektorijumaLista(this, it) })
         //ajde pisem sve opet cisto da se podsetim iako vec imam taj kod skoro sve
         this.defaultCloseOperation= JFrame.EXIT_ON_CLOSE
         val velicinaEkrana = toolkit.screenSize.size
         val visina = velicinaEkrana.height
-        val sirina = velicinaEkrana.width
+         sirina = velicinaEkrana.width
 
         setSize(sirina, visina)
         isVisible = true
@@ -55,22 +55,67 @@ class Forma2: FormaZajednicka(), PromenaJezika {
 //            contentPane.add(it, c)
 //            c.gridx++
 //        }
-
-        postaviteContentPane(c, sirina)
-
+        contentPane.add(panelZaSplitPaneove, c)
+        panelZaSplitPaneove.layout = GridBagLayout()
+        postaviteContentPane(sirina)
+        dodajteMeni()
     }
 
+    private fun dodajteMeni() {
+        val bar: JMenuBar = JMenuBar()
+        val meni = JMenu("Мени")
+        bar.add(meni)
+        val dugmeDodajteNoviDirektorijumZaPretragu = JMenuItem("Додајте")
+        meni.add(dugmeDodajteNoviDirektorijumZaPretragu)
+        dugmeDodajteNoviDirektorijumZaPretragu.addActionListener { e ->
+            val dialog = JFileChooser()
 
+            dialog.fileSelectionMode = JFileChooser.DIRECTORIES_ONLY
+            val result = dialog.showOpenDialog(null)
+            if( result==JFileChooser.APPROVE_OPTION){
+               // println(dialog.selectedFile)
+               dodajteNoviDirektorijum(dialog.selectedFile.absolutePath)
+            }
 
-    fun postaviteContentPane(c:GridBagConstraints, sirina:Int){
+        }
+
+        jMenuBar = bar
+    }
+    fun dodajteNoviDirektorijum(putanjaDoNovogDirektorijuma:String){
+
+        val novi  = NoviPrikazDirektorijumaLista(this@Forma2, putanjaDoNovogDirektorijuma )
+        noviPrikaziDirektorijumaLista.add(novi)
+        novi.pretraga(noviPanelZaPretragu.izvuciteStringZaPretragu())
+        panelZaSplitPaneove.removeAll()
+        postaviteContentPane(sirina)
+        panelZaSplitPaneove.repaint()
+        panelZaSplitPaneove.revalidate()
+    }
+
+    private fun  napraviteJSplitPane(sirinaPanea:Int):JSplitPane{
+        val pane = JSplitPane()
+        pane.isOneTouchExpandable = true
+        pane.dividerLocation= sirinaPanea
+
+        return pane
+    }
+
+    fun postaviteContentPane( sirina:Int){
         val brojDirektorijuma = noviPrikaziDirektorijumaLista.size
         val sirinaPanea = sirina/brojDirektorijuma
         val firstPane = napraviteJSplitPane(sirinaPanea)
         var currentPane = firstPane
 
+        val c = GridBagConstraints()
+        c.weightx=1.0
+        c.weighty=1.0
+        c.fill = GridBagConstraints.BOTH
+        c.gridx=0
+        c.gridy = 0
+
         when(brojDirektorijuma){
              1->{
-                 contentPane.add(noviPrikaziDirektorijumaLista[0], c)
+                 panelZaSplitPaneove.add(noviPrikaziDirektorijumaLista[0], c)
                  return
              }
             2->{
@@ -90,7 +135,8 @@ class Forma2: FormaZajednicka(), PromenaJezika {
         }
 
 
-        contentPane.add(firstPane, c)
+        panelZaSplitPaneove.add(firstPane,c)
+      //  contentPane.add(firstPane, c)
     }
     fun pretraga(zaPretragu:String){
 

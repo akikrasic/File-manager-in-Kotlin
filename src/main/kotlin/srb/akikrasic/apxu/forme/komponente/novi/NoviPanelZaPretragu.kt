@@ -45,7 +45,7 @@ class NoviPanelZaPretragu(forma: Forma2): JPanel() {
         })
 
     }
-    private fun vratiteTekst() = polje.text?.uppercase()?:""
+    private fun vratiteTekst() = (polje.text?.uppercase()?:"").replace(' ','*')
 
     fun izvuciteStringZaPretragu()= vratiteTekst()
 }
