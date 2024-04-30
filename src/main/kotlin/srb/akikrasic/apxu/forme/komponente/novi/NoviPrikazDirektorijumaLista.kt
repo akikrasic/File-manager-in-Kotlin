@@ -98,13 +98,16 @@ class NoviPrikazDirektorijumaLista(val forma: Forma2, var putanja:String = "/") 
         labelaDirektorijum.text = kretanjeKrozDirektorijum.trenutnaApsolutnaPutanja()
     }
     private fun ucitajteNoviDirektorijum(f:File){
-       postaviteListuFajlovaUListuZaPrikaz( kretanjeKrozDirektorijum.namestitePutanjuIVratiteNjeneFajlove(f.absolutePath, forma.izvuciteStringZaPretragu()) )
+       postaviteListuFajlovaUListuZaPrikaz( kretanjeKrozDirektorijum.namestitePutanjuIVratiteNjeneFajloveRegex(f.absolutePath, forma.izvuciteRegexZaPretragu()) )
     }
     private fun iditeNazad(){
-        postaviteListuFajlovaUListuZaPrikaz( kretanjeKrozDirektorijum.vratiteSeNaPrethodniDirektorijumIVratiteMuFajlove(forma.izvuciteStringZaPretragu()) )
+        postaviteListuFajlovaUListuZaPrikaz( kretanjeKrozDirektorijum.vratiteSeNaPrethodniDirektorijumIVratiteMuFajloveRegex(forma.izvuciteRegexZaPretragu()) )
     }
     fun pretraga(zaPretragu:String){
         postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.pretrazite(zaPretragu))
+    }
+    fun pretragaRegex( zaPretraguRegex:Regex){
+        postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.pretraziteRegex(zaPretraguRegex))
     }
     fun prazanString(){
         postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.vratiteFajlove())

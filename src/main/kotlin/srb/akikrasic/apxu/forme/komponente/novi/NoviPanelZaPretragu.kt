@@ -35,7 +35,8 @@ class NoviPanelZaPretragu(forma: Forma2): JPanel() {
             override fun keyReleased(e: KeyEvent?) {
                val s = vratiteTekst()
                  if(s!=""){
-                     forma.pretraga(s)
+                    // forma.pretraga(s)
+                    forma.pretragaRegex(Regex(s, RegexOption.IGNORE_CASE))
                  }
                 else{
                     forma.prazanString()
@@ -45,7 +46,10 @@ class NoviPanelZaPretragu(forma: Forma2): JPanel() {
         })
 
     }
-    private fun vratiteTekst() = (polje.text?.uppercase()?:"").replace(' ','*')
+    private fun vratiteTekst() = ".*${(polje.text?.uppercase()?:"").trim().replace(" ",".*")}.*"
 
     fun izvuciteStringZaPretragu()= vratiteTekst()
+
+    fun izvuciteRegexZaPretragu() = Regex(vratiteTekst(), RegexOption.IGNORE_CASE )
+
 }

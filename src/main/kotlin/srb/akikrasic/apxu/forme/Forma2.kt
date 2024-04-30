@@ -85,7 +85,8 @@ class Forma2: FormaZajednicka(), PromenaJezika {
 
         val novi  = NoviPrikazDirektorijumaLista(this@Forma2, putanjaDoNovogDirektorijuma )
         noviPrikaziDirektorijumaLista.add(novi)
-        novi.pretraga(noviPanelZaPretragu.izvuciteStringZaPretragu())
+        //novi.pretraga(noviPanelZaPretragu.izvuciteStringZaPretragu())
+        novi.pretragaRegex(noviPanelZaPretragu.izvuciteRegexZaPretragu())
         panelZaSplitPaneove.removeAll()
         postaviteContentPane(sirina)
         panelZaSplitPaneove.repaint()
@@ -144,11 +145,16 @@ class Forma2: FormaZajednicka(), PromenaJezika {
             it.pretraga(zaPretragu)
         }
     }
+    fun pretragaRegex(zaPretraguRegex: Regex){
+        noviPrikaziDirektorijumaLista.forEach{
+            it.pretragaRegex(zaPretraguRegex)
+        }
+    }
     fun prazanString(){
         noviPrikaziDirektorijumaLista.forEach{
             it.prazanString()
         }
     }
     fun izvuciteStringZaPretragu() = noviPanelZaPretragu.izvuciteStringZaPretragu()
-
+    fun izvuciteRegexZaPretragu () = noviPanelZaPretragu.izvuciteRegexZaPretragu()
 }
