@@ -7,12 +7,9 @@ import srb.akikrasic.apxu.forme.komponente.novi.NoviPanelZaPretragu
 import srb.akikrasic.apxu.forme.komponente.novi.NoviPrikazDirektorijumaLista
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
-import java.awt.GridBagLayoutInfo
-import java.awt.JobAttributes.DialogType
-import java.io.File
+import java.awt.event.WindowEvent
+import java.awt.event.WindowListener
 import javax.swing.*
-import javax.swing.filechooser.FileFilter
-import javax.swing.filechooser.FileView
 
 class Forma2: FormaZajednicka(), PromenaJezika {
 
@@ -29,7 +26,7 @@ class Forma2: FormaZajednicka(), PromenaJezika {
 
     init{
 
-        noviPrikaziDirektorijumaLista.addAll(PocetnePutanje.vratitePocetnePutanje().map { NoviPrikazDirektorijumaLista(this, it) })
+        noviPrikaziDirektorijumaLista.addAll(PocetnePutanje.ucitajtePocetnePutanje().map { NoviPrikazDirektorijumaLista(this, it) })
         //ajde pisem sve opet cisto da se podsetim iako vec imam taj kod skoro sve
         this.defaultCloseOperation= JFrame.EXIT_ON_CLOSE
         val velicinaEkrana = toolkit.screenSize.size
@@ -59,6 +56,36 @@ class Forma2: FormaZajednicka(), PromenaJezika {
         panelZaSplitPaneove.layout = GridBagLayout()
         postaviteContentPane(sirina)
         dodajteMeni()
+        gasenjeSacuvajteDirektorijume()
+    }
+
+    private fun gasenjeSacuvajteDirektorijume() {
+        this.addWindowListener(object:WindowListener{
+            override fun windowOpened(e: WindowEvent?) {
+
+            }
+
+            override fun windowClosing(e: WindowEvent?) {
+                PocetnePutanje.sacuvajtePutanjeZaSledeciPut(noviPrikaziDirektorijumaLista.map{it.putanja})
+            }
+
+            override fun windowClosed(e: WindowEvent?) {
+
+            }
+
+            override fun windowIconified(e: WindowEvent?) {
+            }
+
+            override fun windowDeiconified(e: WindowEvent?) {
+            }
+
+            override fun windowActivated(e: WindowEvent?) {
+            }
+
+            override fun windowDeactivated(e: WindowEvent?) {
+            }
+
+        })
     }
 
     private fun dodajteMeni() {
