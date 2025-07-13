@@ -1,6 +1,6 @@
 package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners
 
-import srb.akikrasic.apxu.forme.komponente.novi.EnterTextForSearchingPanel
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels.EnterTextForSearchingPanel
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 

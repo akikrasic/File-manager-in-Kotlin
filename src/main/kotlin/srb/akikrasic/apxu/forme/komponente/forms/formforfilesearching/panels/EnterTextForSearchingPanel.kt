@@ -1,4 +1,4 @@
-package srb.akikrasic.apxu.forme.komponente.novi
+package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels
 
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.FormForFileSearchingInMultipleDirectories
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners.SearchTextFieldListener
@@ -18,7 +18,7 @@ class EnterTextForSearchingPanel(val formForFileSearchingInMultipleDirectories: 
         val c = GridBagConstraintsCreator.createGridBagConstraints()
         c.fill= GridBagConstraints.BOTH
         c.weightx=1.0
-        c.insets = Insets(10,10,10,10)
+        c.insets = Insets(10, 10, 10, 10)
 
         add(searchTextLabel, c)
         c.gridy=1

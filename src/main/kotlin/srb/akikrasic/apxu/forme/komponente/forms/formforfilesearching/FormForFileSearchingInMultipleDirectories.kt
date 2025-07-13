@@ -6,7 +6,7 @@ import srb.akikrasic.apxu.forme.jezici.PromenaJezika
 import srb.akikrasic.apxu.forme.komponente.forms.Form
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners.SaveDirectoriesForNextStartListener
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
-import srb.akikrasic.apxu.forme.komponente.novi.EnterTextForSearchingPanel
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels.EnterTextForSearchingPanel
 import srb.akikrasic.apxu.forme.komponente.novi.NoviPrikazDirektorijumaLista
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
