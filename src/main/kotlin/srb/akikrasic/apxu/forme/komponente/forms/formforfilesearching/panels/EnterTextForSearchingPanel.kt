@@ -11,7 +11,7 @@ import javax.swing.JPanel
 import javax.swing.JTextField
 
 class EnterTextForSearchingPanel(val formForFileSearchingInMultipleDirectories: FormForFileSearchingInMultipleDirectories): JPanel() {
-    val searchTextLabel = JLabel("Унсите текст за претрагу у директоријумима:")
+    val searchTextLabel = JLabel("Унесите текст за претрагу у директоријумима:")
     val searchTextField = JTextField()
     init{
         layout= GridBagLayout()
