@@ -4,8 +4,9 @@ import srb.akikrasic.apxu.fajlsistem.PocetnePutanje
 import srb.akikrasic.apxu.forme.jezici.JezikServis
 import srb.akikrasic.apxu.forme.jezici.PromenaJezika
 import srb.akikrasic.apxu.forme.komponente.forms.Form
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners.SaveDirectoriesForNextStartListener
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
-import srb.akikrasic.apxu.forme.komponente.novi.NoviPanelZaPretragu
+import srb.akikrasic.apxu.forme.komponente.novi.EnterTextForSearchingPanel
 import srb.akikrasic.apxu.forme.komponente.novi.NoviPrikazDirektorijumaLista
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -19,7 +20,7 @@ import javax.swing.JSplitPane
 
 class FormForFileSearchingInMultipleDirectories: Form(), PromenaJezika {
 
-    val enterTextForSearchingPanel = NoviPanelZaPretragu(this)
+    val enterTextForSearchingPanel = EnterTextForSearchingPanel(this)
     val showDirectoriesPanelsList = mutableListOf<NoviPrikazDirektorijumaLista>()
     val panelForJSplitPanes = JPanel()
     var screenWidth = 0
@@ -97,7 +98,7 @@ class FormForFileSearchingInMultipleDirectories: Form(), PromenaJezika {
             NoviPrikazDirektorijumaLista(this@FormForFileSearchingInMultipleDirectories, pathToNewDirectory)
         showDirectoriesPanelsList.add(newDirectoryForShowing)
         //novi.pretraga(noviPanelZaPretragu.izvuciteStringZaPretragu())
-        newDirectoryForShowing.pretragaRegex(enterTextForSearchingPanel.izvuciteRegexZaPretragu())
+        newDirectoryForShowing.pretragaRegex(enterTextForSearchingPanel.takeRegexForSearching())
         panelForJSplitPanes.removeAll()
         addDirectoriesToJSplitPane(screenWidth)
         panelForJSplitPanes.repaint()
@@ -163,6 +164,6 @@ class FormForFileSearchingInMultipleDirectories: Form(), PromenaJezika {
             it.prazanString()
         }
     }
-    fun takeStringForSearch() = enterTextForSearchingPanel.izvuciteStringZaPretragu()
-    fun takeRegexForSearch () = enterTextForSearchingPanel.izvuciteRegexZaPretragu()
+    fun takeStringForSearch() = enterTextForSearchingPanel.takeTextForSearching()
+    fun takeRegexForSearch () = enterTextForSearchingPanel.takeRegexForSearching()
 }

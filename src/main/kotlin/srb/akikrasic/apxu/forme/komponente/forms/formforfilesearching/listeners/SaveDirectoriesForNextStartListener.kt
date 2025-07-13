@@ -1,10 +1,12 @@
-package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching
+package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners
 
 import srb.akikrasic.apxu.fajlsistem.PocetnePutanje
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.FormForFileSearchingInMultipleDirectories
 import java.awt.event.WindowEvent
 import java.awt.event.WindowListener
 
-class SaveDirectoriesForNextStartListener (val formForFileSearchingInMultipleDirectories: FormForFileSearchingInMultipleDirectories): WindowListener {
+class SaveDirectoriesForNextStartListener (val formForFileSearchingInMultipleDirectories: FormForFileSearchingInMultipleDirectories):
+    WindowListener {
     override fun windowOpened(e: WindowEvent?) {
 
     }

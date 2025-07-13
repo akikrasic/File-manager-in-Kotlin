@@ -2,6 +2,7 @@ package srb.akikrasic.apxu.forme.komponente.novi
 
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.FormForFileSearchingInMultipleDirectories
 import srb.akikrasic.apxu.forme.komponente.ListaRenderer
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.models.DirectoryListModel
 import java.awt.*
 import java.awt.event.ActionListener
 import java.awt.event.MouseEvent
@@ -9,7 +10,7 @@ import java.awt.event.MouseListener
 import java.io.File
 import javax.swing.*
 
-class NoviPrikazDirektorijumaLista(val forma: FormForFileSearchingInMultipleDirectories, var putanja:String = "/") : JPanel(){
+class NoviPrikazDirektorijumaLista(val forma: FormForFileSearchingInMultipleDirectories,  putanja:String = "/") : JPanel(){
     val labelaPrva = JLabel("Тренутни директоријум")
     val labelaDirektorijum = JLabel(putanja)
     val nazad = JButton("Назад")
@@ -93,7 +94,7 @@ class NoviPrikazDirektorijumaLista(val forma: FormForFileSearchingInMultipleDire
     }
 
     private fun postaviteListuFajlovaUListuZaPrikaz(l:List<File>){
-        lista.model = ListaModelSaListom(l)
+        lista.model = DirectoryListModel(l)
         labelaDirektorijum.text = kretanjeKrozDirektorijum.trenutnaApsolutnaPutanja()
     }
     private fun ucitajteNoviDirektorijum(f:File){
