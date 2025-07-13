@@ -14,10 +14,10 @@ class PanelPrikazFajla(val forma: Forma): PanelZajednicki(){
     val labelaNazivFajla = JLabel()
     val labelaOdabranaArhivaNatpis = JLabel()
     val dugmeDodajteUArhivu = JButton()
-    override fun vratiteMapu(): Map<String, String> {
+    override fun returnLanguageMap(): Map<String, String> {
         return JezikServis.odabraniJezik().panelPrikazFajla()
     }
-    override fun ucitajteJezikUPanel(mapa:Map<String, String>) {
+    override fun loadLanguageIntoTheForm(mapa:Map<String, String>) {
 
         labelaNazivFajlaNatpis.text=mapa["labelaNazivFajlaNatpis"]
     }

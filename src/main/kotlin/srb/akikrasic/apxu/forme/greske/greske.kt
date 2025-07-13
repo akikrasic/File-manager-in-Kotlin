@@ -13,12 +13,12 @@ abstract  class Greska:Odgovor, PromenaJezika{
     override fun poruka():String =porukaText
     abstract fun stringZaPoruku():String
 
-     override fun ucitajteJezikUPanel(mapa: Map<String, String>) {
+     override fun loadLanguageIntoTheForm(mapa: Map<String, String>) {
          porukaText=mapa[stringZaPoruku()]!!;
 
      }
 
-    override fun vratiteMapu(): HashMap<String, String> = JezikServis.odabraniJezik().greske()
+    override fun returnLanguageMap(): HashMap<String, String> = JezikServis.odabraniJezik().greske()
 
 }
 class NijeUReduPostojiSaIstimImenom:Greska(){
@@ -33,11 +33,11 @@ class NijeOdabranaArhiva:Greska(), PromenaJezika{
 object Greske :PromenaJezika{
     val nijeUReduPostojiSaIstimImenom =NijeUReduPostojiSaIstimImenom()
     val nijeOdabranaArhiva = NijeOdabranaArhiva()
-    override fun ucitajteJezikUPanel(mapa: Map<String, String>) {
+    override fun loadLanguageIntoTheForm(mapa: Map<String, String>) {
 
     }
 
-    override fun vratiteMapu(): HashMap<String, String> {
+    override fun returnLanguageMap(): HashMap<String, String> {
         return HashMap<String, String>()
     }
 

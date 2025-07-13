@@ -77,10 +77,10 @@ class PrikazDirektorijumaLista(var forma: Forma, val putanja:String="/"): PanelZ
         lista.model = ListaModel(kretanjeKrozFajlSistem.pretraga(traziSe))
     }
 
-    override fun vratiteMapu(): HashMap<String, String> {
+    override fun returnLanguageMap(): HashMap<String, String> {
         return JezikServis.odabraniJezik().prikazDirektorijumaLista()
     }
-    override fun ucitajteJezikUPanel(mapa:Map<String, String> ) {
+    override fun loadLanguageIntoTheForm(mapa:Map<String, String> ) {
         labelaDirektorijumNatpis.text = mapa["labelaDirektorijumNatpis"]
         labelaPretragaNatpis.text = mapa["labelaPretragaNatpis"]
         dugmeNazad.text =mapa["dugmeNazad"]

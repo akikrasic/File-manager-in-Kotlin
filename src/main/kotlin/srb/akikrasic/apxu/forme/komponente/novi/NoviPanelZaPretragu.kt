@@ -1,17 +1,16 @@
 package srb.akikrasic.apxu.forme.komponente.novi
 
-import srb.akikrasic.apxu.forme.Forma2
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.FormForFileSearchingInMultipleDirectories
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
-import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTextField
 
-class NoviPanelZaPretragu(forma: Forma2): JPanel() {
+class NoviPanelZaPretragu(forma: FormForFileSearchingInMultipleDirectories): JPanel() {
     val labela = JLabel("Унсите текст за претрагу у директоријумима:")
     val polje = JTextField()
     init{
@@ -36,10 +35,10 @@ class NoviPanelZaPretragu(forma: Forma2): JPanel() {
                val s = vratiteTekst()
                  if(s!=""){
                     // forma.pretraga(s)
-                    forma.pretragaRegex(Regex(s, RegexOption.IGNORE_CASE))
+                    forma.searchRegex(Regex(s, RegexOption.IGNORE_CASE))
                  }
                 else{
-                    forma.prazanString()
+                    forma.emptyString()
                 }
             }
 

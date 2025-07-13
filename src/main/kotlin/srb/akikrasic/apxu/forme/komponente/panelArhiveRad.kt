@@ -17,7 +17,7 @@ open class PanelDodajteArhivu(protected open val rad:PanelArhiveRad): PanelZajed
     var porukaPrazanNaziv:String=""
     var porukaNaslov :String = ""
 
-     override  fun ucitajteJezikUPanel(mapa:Map<String, String>) {
+     override  fun loadLanguageIntoTheForm(mapa:Map<String, String>) {
          labelaNaziv.text = mapa["labelaNaziv"]
          labelaOpis.text = mapa["labelaOpis"]
          dugmeDodajteArhivu.text = mapa["dugmeDodajteArhivu"]
@@ -26,7 +26,7 @@ open class PanelDodajteArhivu(protected open val rad:PanelArhiveRad): PanelZajed
 
     }
 
-    override fun vratiteMapu(): HashMap<String, String> {
+    override fun returnLanguageMap(): HashMap<String, String> {
         return JezikServis.odabraniJezik().panelDodajteArhivu()
     }
 
@@ -91,7 +91,7 @@ open class PanelDodajteArhivu(protected open val rad:PanelArhiveRad): PanelZajed
 
 class PanelIzmeniteArhivu( override val rad:PanelArhiveRad): PanelDodajteArhivu(rad){
 
-    override fun vratiteMapu(): HashMap<String, String> {
+    override fun returnLanguageMap(): HashMap<String, String> {
         return JezikServis.odabraniJezik().panelIzmeniteArhivu()
     }
     /*
@@ -132,10 +132,10 @@ class PanelArhiveRad(val forma: Forma): PanelZajednicki(){
     val panelIzmeniteArhivu = PanelIzmeniteArhivu(this)
     val panelObrisiteArhivu = PanelObrisiteArhivu(this)
     var odabranaArhiva:Arhiva = Podaci.praznaArhiva
-    override fun vratiteMapu(): Map<String, String> {
+    override fun returnLanguageMap(): Map<String, String> {
         return  JezikServis.odabraniJezik().panelArhiveRad()
     }
-    override fun ucitajteJezikUPanel(mapa:Map<String, String> ) {
+    override fun loadLanguageIntoTheForm(mapa:Map<String, String> ) {
         tabovi.setTitleAt(0,mapa["dodajte"])
         tabovi.setTitleAt(1,mapa["izmenite"])
         tabovi.setTitleAt(2,mapa["obrisite"])
