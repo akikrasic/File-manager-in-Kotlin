@@ -66,7 +66,7 @@ class Forma2: FormaZajednicka(), PromenaJezika {
             }
 
             override fun windowClosing(e: WindowEvent?) {
-                PocetnePutanje.sacuvajtePutanjeZaSledeciPut(noviPrikaziDirektorijumaLista.map{it.putanja})
+                PocetnePutanje.sacuvajtePutanjeZaSledeciPut(noviPrikaziDirektorijumaLista.map{it.kretanjeKrozDirektorijum.putanja})
             }
 
             override fun windowClosed(e: WindowEvent?) {
