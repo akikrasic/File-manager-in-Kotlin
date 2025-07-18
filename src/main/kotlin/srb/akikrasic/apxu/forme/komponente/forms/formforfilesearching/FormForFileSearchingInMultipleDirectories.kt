@@ -8,7 +8,7 @@ import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners.
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels.EnterTextForSearchingPanel
-import srb.akikrasic.apxu.forme.komponente.novi.NoviPrikazDirektorijumaLista
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels.ShowDirectoryContentInList
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import javax.swing.JFileChooser
@@ -22,7 +22,7 @@ import javax.swing.JSplitPane
 class FormForFileSearchingInMultipleDirectories: Form(), PromenaJezika {
 
     val enterTextForSearchingPanel = EnterTextForSearchingPanel(this)
-    val showDirectoriesPanelsList = mutableListOf<NoviPrikazDirektorijumaLista>()
+    val showDirectoriesPanelsList = mutableListOf<ShowDirectoryContentInList>()
     val panelForJSplitPanes = JPanel()
     var screenWidth = 0
 
@@ -36,7 +36,7 @@ class FormForFileSearchingInMultipleDirectories: Form(), PromenaJezika {
     init{
 
         showDirectoriesPanelsList.addAll(PocetnePutanje.ucitajtePocetnePutanje().map {
-            NoviPrikazDirektorijumaLista(
+            ShowDirectoryContentInList(
                 this,
                 it
             )
@@ -96,7 +96,7 @@ class FormForFileSearchingInMultipleDirectories: Form(), PromenaJezika {
     fun addNewDirectory(pathToNewDirectory:String){
 
         val newDirectoryForShowing  =
-            NoviPrikazDirektorijumaLista(this@FormForFileSearchingInMultipleDirectories, pathToNewDirectory)
+            ShowDirectoryContentInList(this@FormForFileSearchingInMultipleDirectories, pathToNewDirectory)
         showDirectoriesPanelsList.add(newDirectoryForShowing)
         //novi.pretraga(noviPanelZaPretragu.izvuciteStringZaPretragu())
         newDirectoryForShowing.pretragaRegex(enterTextForSearchingPanel.takeRegexForSearching())

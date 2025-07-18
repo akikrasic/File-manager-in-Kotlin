@@ -32,7 +32,7 @@ class NovoKretanjeKrozDirektorijum(var currentDirectoryString: String = "/") {
         return vratiteFajloveIProverite(zaPretragu)
     }
 
-
+    //to je manje vise u redu samo treba novi naziv osim Regex
     fun vratiteSeNaPrethodniDirektorijumIVratiteMuFajloveRegex(zaPretraguRegex:Regex): List<File> {
         if (currentDirectoryString != "/") {
             currentDirectoryFile = currentDirectoryFile.parentFile ?: File("/")
