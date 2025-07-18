@@ -12,7 +12,7 @@ class SaveDirectoriesForNextStartListener (val formForFileSearchingInMultipleDir
     }
 
     override fun windowClosing(e: WindowEvent?) {
-        PocetnePutanje.sacuvajtePutanjeZaSledeciPut(formForFileSearchingInMultipleDirectories.showDirectoriesPanelsList.map{it.kretanjeKrozDirektorijum.putanja})
+        PocetnePutanje.sacuvajtePutanjeZaSledeciPut(formForFileSearchingInMultipleDirectories.showDirectoriesPanelsList.map{it.kretanjeKrozDirektorijum.currentDirectoryString})
     }
 
     override fun windowClosed(e: WindowEvent?) {

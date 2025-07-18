@@ -12,14 +12,15 @@ class SearchTextFieldListener(val enterTextForSearchingPanel: EnterTextForSearch
     }
 
     override fun keyReleased(e: KeyEvent?) {
-        val s = enterTextForSearchingPanel.textForSearching()
-        if(s!=""){
-
-            enterTextForSearchingPanel.formForFileSearchingInMultipleDirectories.searchRegex(Regex(s, RegexOption.IGNORE_CASE))
-        }
-        else{
-            enterTextForSearchingPanel.formForFileSearchingInMultipleDirectories.emptyString()
-        }
+//        val s = enterTextForSearchingPanel.textForSearching()
+//        if(s!=""){
+//
+//            enterTextForSearchingPanel.formForFileSearchingInMultipleDirectories.searchRegex(Regex(s, RegexOption.IGNORE_CASE))
+//        }
+//        else{
+//            enterTextForSearchingPanel.formForFileSearchingInMultipleDirectories.emptyString()
+//        }
+        enterTextForSearchingPanel.search()
     }
 
 }

@@ -5,6 +5,7 @@ import srb.akikrasic.apxu.forme.jezici.JezikServis
 import srb.akikrasic.apxu.forme.jezici.PromenaJezika
 import srb.akikrasic.apxu.forme.komponente.forms.Form
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners.SaveDirectoriesForNextStartListener
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels.EnterTextForSearchingPanel
 import srb.akikrasic.apxu.forme.komponente.novi.NoviPrikazDirektorijumaLista
@@ -147,6 +148,11 @@ class FormForFileSearchingInMultipleDirectories: Form(), PromenaJezika {
 
         panelForJSplitPanes.add(firstPane,c)
       //  contentPane.add(firstPane, c)
+    }
+    fun search(wayOfSearching: WayOfSearching){
+        showDirectoriesPanelsList.forEach {
+            it.search(wayOfSearching)
+        }
     }
     fun search(forSearch:String){
 

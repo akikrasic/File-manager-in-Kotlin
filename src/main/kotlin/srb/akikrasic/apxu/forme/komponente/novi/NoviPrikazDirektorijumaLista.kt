@@ -3,6 +3,10 @@ package srb.akikrasic.apxu.forme.komponente.novi
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.FormForFileSearchingInMultipleDirectories
 import srb.akikrasic.apxu.forme.komponente.ListaRenderer
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.models.DirectoryListModel
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.NovoKretanjeKrozDirektorijum
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.ChangeWhitespaceWithDotAnyWayOfSearching
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
+import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
 import java.awt.*
 import java.awt.event.ActionListener
 import java.awt.event.MouseEvent
@@ -21,17 +25,15 @@ class NoviPrikazDirektorijumaLista(val forma: FormForFileSearchingInMultipleDire
 
     init{
         layout = GridBagLayout()
-        val c = GridBagConstraints()
+        val c = GridBagConstraintsCreator.createGridBagConstraints()
         c.insets = Insets(5,5,5,5)
-        c.gridx = 0
-        c.gridy = 0
         c.fill = GridBagConstraints.BOTH
         c.weightx = 1.0
 
 
 
 
-        postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.vratiteFajlove())
+        postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.getAllFilesFromCurrentDirectorySorted())
         lista.cellRenderer = ListaRenderer()
         lista.addMouseListener(object: MouseListener {
 
@@ -50,13 +52,13 @@ class NoviPrikazDirektorijumaLista(val forma: FormForFileSearchingInMultipleDire
 
                     val menu = JPopupMenu()
                     val item = JMenuItem("Додајте")
-                    val el = lista.model.getElementAt(lista.locationToIndex(Point(e?.x?:0, e?.y?:0)))
+                    val el = lista.model.getElementAt(lista.locationToIndex(Point(e.x,e.y)))
                     menu.add(item)
                     item.addActionListener{event->
                         forma.addNewDirectory(el.absolutePath)
                     }
                     if( el.isDirectory) {
-                        menu.show(lista, e?.x ?: 0, e?.y ?: 0)
+                        menu.show(lista, e.x, e.y)
                     }
                 }
             }
@@ -110,7 +112,10 @@ class NoviPrikazDirektorijumaLista(val forma: FormForFileSearchingInMultipleDire
         postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.pretraziteRegex(zaPretraguRegex))
     }
     fun prazanString(){
-        postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.vratiteFajlove())
+        postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.getAllFilesFromCurrentDirectorySorted())
+    }
+    fun search(wayOfSearching: WayOfSearching){
+        postaviteListuFajlovaUListuZaPrikaz(kretanjeKrozDirektorijum.search(wayOfSearching))
     }
 
 
