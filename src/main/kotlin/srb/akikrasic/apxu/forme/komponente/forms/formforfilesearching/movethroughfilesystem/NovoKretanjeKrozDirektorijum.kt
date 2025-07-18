@@ -2,10 +2,12 @@ package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethrou
 
 import srb.akikrasic.apxu.fajlsistem.komparator
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WholeStringWayOfSearching
 import java.io.File
 
 class NovoKretanjeKrozDirektorijum(var currentDirectoryString: String = "/") {
     var currentDirectoryFile  = File(currentDirectoryString)
+    var currentWayOfSearching: WayOfSearching = WholeStringWayOfSearching("")
     fun setCurrentDirecoryStringAndFile(currentDirectory:String){
         currentDirectoryString = currentDirectory
         currentDirectoryFile = File(currentDirectory)
@@ -36,7 +38,7 @@ class NovoKretanjeKrozDirektorijum(var currentDirectoryString: String = "/") {
             currentDirectoryFile = currentDirectoryFile.parentFile ?: File("/")
             currentDirectoryString = currentDirectoryFile.name
         }
-        return vratiteFajloveIProveriteRegex(zaPretraguRegex)
+        return search(this.currentWayOfSearching)
     }
 
     fun vratiteFajloveIProverite(zaPretragu:String):List<File>{
@@ -59,10 +61,16 @@ class NovoKretanjeKrozDirektorijum(var currentDirectoryString: String = "/") {
 
     fun trenutnaApsolutnaPutanja() = currentDirectoryFile.absolutePath
 
-    fun search(wayOfSearching: WayOfSearching)=
-        currentDirectoryFile.listFiles()?.filter{
-            wayOfSearching.fileNameMatches(it)
-        }?.sortedWith(komparator)?: listOf()
+    fun search(wayOfSearching: WayOfSearching):List<File> {
+        currentWayOfSearching = wayOfSearching
+        return if (!wayOfSearching.shouldNotSearch()) {
+            currentDirectoryFile.listFiles()?.filter {
+                wayOfSearching.fileNameMatches(it)
+            }?.sortedWith(komparator) ?: listOf()
+        } else {
+            getAllFilesFromCurrentDirectorySorted()
+        }
+    }
 
 
     fun pretrazite(zaPretragu: String): List<File> =

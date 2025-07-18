@@ -6,4 +6,5 @@ open class ChangeWhitespaceWithDotAnyWayOfSearching(override val forSearch:Strin
     val regex = createRegex()
     override fun fileNameMatches(file: File): Boolean =regex.containsMatchIn(file.name.uppercase())
     open fun createRegex():Regex=Regex(".*${(forSearch.uppercase()).trim().replace(" ",".*")}.*")
+
 }
