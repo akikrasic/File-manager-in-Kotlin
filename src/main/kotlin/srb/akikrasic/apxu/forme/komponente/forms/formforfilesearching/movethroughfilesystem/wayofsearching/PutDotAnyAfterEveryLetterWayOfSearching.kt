@@ -3,9 +3,6 @@ package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethrou
 class PutDotAnyAfterEveryLetterWayOfSearching(override val forSearch:String): ChangeWhitespaceWithDotAnyWayOfSearching(forSearch) {
 
     override fun createRegex(): Regex {
-        if(super.forSearch==null){
-            return Regex("")
-        }
         val sb = StringBuilder(".*")
 
         for( c in super.forSearch){
