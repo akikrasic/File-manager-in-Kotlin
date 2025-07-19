@@ -98,8 +98,7 @@ class FormForFileSearchingInMultipleDirectories: Form(), PromenaJezika {
         val newDirectoryForShowing  =
             ShowDirectoryContentInList(this@FormForFileSearchingInMultipleDirectories, pathToNewDirectory)
         showDirectoriesPanelsList.add(newDirectoryForShowing)
-        //novi.pretraga(noviPanelZaPretragu.izvuciteStringZaPretragu())
-        newDirectoryForShowing.pretragaRegex(enterTextForSearchingPanel.takeRegexForSearching())
+        newDirectoryForShowing.search(enterTextForSearchingPanel.wayOfSearching)
         panelForJSplitPanes.removeAll()
         addDirectoriesToJSplitPane(screenWidth)
         panelForJSplitPanes.repaint()
@@ -154,22 +153,6 @@ class FormForFileSearchingInMultipleDirectories: Form(), PromenaJezika {
             it.search(wayOfSearching)
         }
     }
-    fun search(forSearch:String){
 
-        showDirectoriesPanelsList.forEach {
-            it.pretraga(forSearch)
-        }
-    }
-    fun searchRegex(forSearchRegex: Regex){
-        showDirectoriesPanelsList.forEach{
-            it.pretragaRegex(forSearchRegex)
-        }
-    }
-    fun emptyString(){
-        showDirectoriesPanelsList.forEach{
-            it.prazanString()
-        }
-    }
-    fun takeStringForSearch() = enterTextForSearchingPanel.takeTextForSearching()
-    fun takeRegexForSearch () = enterTextForSearchingPanel.takeRegexForSearching()
-}
+    fun getCurrentWayOfSearching() = enterTextForSearchingPanel.wayOfSearching
+  }

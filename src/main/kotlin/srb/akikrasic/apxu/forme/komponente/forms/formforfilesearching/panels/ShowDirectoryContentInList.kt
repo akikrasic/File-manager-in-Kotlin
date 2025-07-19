@@ -57,7 +57,7 @@ class ShowDirectoryContentInList(val formFileSearchingInMultipleDirectories: For
         val f = listForShowingDirectoryContent.selectedValue ?: File("/")
 
         if(f.isDirectory){
-            ucitajteNoviDirektorijum(f)
+            openDirectoryAndShow(f)
         }
         else{
             Desktop.getDesktop().open(f)
@@ -84,23 +84,16 @@ class ShowDirectoryContentInList(val formFileSearchingInMultipleDirectories: For
         listForShowingDirectoryContent.model = DirectoryListModel(l)
         showCurrentDirectoryLabel.text = kretanjeKrozDirektorijum.trenutnaApsolutnaPutanja()
     }
-    private fun ucitajteNoviDirektorijum(f: File){
-       putListOfFilesIntoJListForShowing( kretanjeKrozDirektorijum.namestitePutanjuIVratiteNjeneFajloveRegex(f.absolutePath, formFileSearchingInMultipleDirectories.takeRegexForSearch()) )
-    }
+
     private fun goToPreviousDirectory(){
-        putListOfFilesIntoJListForShowing( kretanjeKrozDirektorijum.vratiteSeNaPrethodniDirektorijumIVratiteMuFajloveRegex(formFileSearchingInMultipleDirectories.takeRegexForSearch()) )
+        putListOfFilesIntoJListForShowing( kretanjeKrozDirektorijum.returnToPreviousDirectoryAndReturnHisFiles() )
     }
-    fun pretraga(zaPretragu:String){
-        putListOfFilesIntoJListForShowing(kretanjeKrozDirektorijum.pretrazite(zaPretragu))
-    }
-    fun pretragaRegex( zaPretraguRegex:Regex){
-        putListOfFilesIntoJListForShowing(kretanjeKrozDirektorijum.pretraziteRegex(zaPretraguRegex))
-    }
-    fun prazanString(){
-        putListOfFilesIntoJListForShowing(kretanjeKrozDirektorijum.getAllFilesFromCurrentDirectorySorted())
-    }
+
     fun search(wayOfSearching: WayOfSearching){
         putListOfFilesIntoJListForShowing(kretanjeKrozDirektorijum.search(wayOfSearching))
+    }
+    fun openDirectoryAndShow(directory:File){
+        putListOfFilesIntoJListForShowing(kretanjeKrozDirektorijum.goToDirectoryAndReturnItsFiles(directory))
     }
 
 

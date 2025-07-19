@@ -8,9 +8,10 @@ import java.io.File
 class NovoKretanjeKrozDirektorijum(var currentDirectoryString: String = "/") {
     var currentDirectoryFile  = File(currentDirectoryString)
     var currentWayOfSearching: WayOfSearching = WholeStringWayOfSearching("")
-    fun setCurrentDirecoryStringAndFile(currentDirectory:String){
-        currentDirectoryString = currentDirectory
-        currentDirectoryFile = File(currentDirectory)
+
+    fun setCurrentDirectoryStringAndFileFromFile(directory:File){
+        currentDirectoryString = directory.name
+        currentDirectoryFile = directory
     }
     fun namestitePutanjuIVratiteNjeneFajlove(novaPutanja: String, zaPretragu:String): List<File> {
         currentDirectoryString = novaPutanja
@@ -32,12 +33,16 @@ class NovoKretanjeKrozDirektorijum(var currentDirectoryString: String = "/") {
         return vratiteFajloveIProverite(zaPretragu)
     }
 
-    //to je manje vise u redu samo treba novi naziv osim Regex
-    fun vratiteSeNaPrethodniDirektorijumIVratiteMuFajloveRegex(zaPretraguRegex:Regex): List<File> {
+
+    fun returnToPreviousDirectoryAndReturnHisFiles(): List<File> {
         if (currentDirectoryString != "/") {
-            currentDirectoryFile = currentDirectoryFile.parentFile ?: File("/")
-            currentDirectoryString = currentDirectoryFile.name
+            setCurrentDirectoryStringAndFileFromFile(currentDirectoryFile.parentFile ?: File("/"))
         }
+        return search(this.currentWayOfSearching)
+    }
+
+    fun goToDirectoryAndReturnItsFiles(directory:File):List<File>{
+        setCurrentDirectoryStringAndFileFromFile(directory)
         return search(this.currentWayOfSearching)
     }
 
