@@ -36,7 +36,7 @@ class FormForFileSearchingInMultipleDirectories : Form(), PromenaJezika {
             )
         })
         //ajde pisem sve opet cisto da se podsetim iako vec imam taj kod skoro sve
-        this.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        this.defaultCloseOperation = EXIT_ON_CLOSE
         val screenDimensions = toolkit.screenSize.size
         screenWidth = screenDimensions.width
         setSize(screenWidth, screenDimensions.height)
@@ -153,5 +153,4 @@ class FormForFileSearchingInMultipleDirectories : Form(), PromenaJezika {
         }
     }
 
-    fun getCurrentWayOfSearching() = enterTextForSearchingPanel.wayOfSearching
 }
