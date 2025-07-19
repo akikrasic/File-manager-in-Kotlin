@@ -26,7 +26,6 @@ class EnterTextForSearchingPanel(val formForFileSearchingInMultipleDirectories: 
     )
     var wayOfSearching: WayOfSearching = WholeStringWayOfSearching("")
     var selectedWayOfSearching = 0
-    var forSearch: String = ""
 
     init {
         layout = GridBagLayout()
@@ -45,12 +44,7 @@ class EnterTextForSearchingPanel(val formForFileSearchingInMultipleDirectories: 
     }
 
     fun textForSearching() = searchTextField.text?.trim()?.uppercase()
-        ?: "" //".*${(searchTextField.text?.uppercase()?:"").trim().replace(" ",".*")}.*"
-
-    fun takeTextForSearching() = textForSearching()
-
-    fun takeRegexForSearching() = Regex(textForSearching(), RegexOption.IGNORE_CASE)
-
+        ?: ""
 
     fun search() {
         wayOfSearching = constructors[selectedWayOfSearching](textForSearching())
@@ -61,6 +55,5 @@ class EnterTextForSearchingPanel(val formForFileSearchingInMultipleDirectories: 
         selectedWayOfSearching = number
         search()
     }
-
 
 }
