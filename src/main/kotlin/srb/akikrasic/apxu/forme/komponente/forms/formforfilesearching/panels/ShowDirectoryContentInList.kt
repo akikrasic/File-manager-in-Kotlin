@@ -35,7 +35,7 @@ class ShowDirectoryContentInList(
         listForShowingDirectoryContent.cellRenderer = ListaRenderer()
         listForShowingDirectoryContent.addMouseListener(ShowDirectoryContentInListMouseListener(this))
 
-        backJButton.addActionListener(ActionListener { goToPreviousDirectory() })
+        backJButton.addActionListener { goToPreviousDirectory() }
         listOf(currentDirectoryTitleLabel, showCurrentDirectoryLabel, backJButton)
             .forEach {
                 add(it, c)
