@@ -1,10 +1,10 @@
 package srb.akikrasic.apxu.fajlsistem
 
-import java.awt.Desktop
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.ComparatorOfFilesForShowingInList
 import java.io.File
 import java.util.*
 
-val komparator = Komparator()
+val komparator = ComparatorOfFilesForShowingInList()
 class KretanjeKrozFajlSistem(var putanja:String="/"){
 
     lateinit var  prethodni:File

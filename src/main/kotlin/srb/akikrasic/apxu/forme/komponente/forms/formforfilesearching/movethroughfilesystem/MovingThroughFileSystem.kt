@@ -1,11 +1,11 @@
 package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem
 
-import srb.akikrasic.apxu.fajlsistem.komparator
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WholeStringWayOfSearching
 import java.io.File
 
 class MovingThroughFileSystem(var currentDirectoryString: String = "/") {
+    val comparator = ComparatorOfFilesForShowingInList()
     var currentDirectoryFile = File(currentDirectoryString)
     var currentWayOfSearching: WayOfSearching = WholeStringWayOfSearching("")
 
@@ -27,7 +27,7 @@ class MovingThroughFileSystem(var currentDirectoryString: String = "/") {
     }
 
     fun getAllFilesFromCurrentDirectorySorted(): List<File> {
-        return currentDirectoryFile.listFiles()?.sortedWith(komparator) ?: listOf()
+        return currentDirectoryFile.listFiles()?.sortedWith(comparator) ?: listOf()
     }
 
     fun currentAbsolutePath() = currentDirectoryFile.absolutePath
@@ -37,7 +37,7 @@ class MovingThroughFileSystem(var currentDirectoryString: String = "/") {
         return if (!wayOfSearching.shouldNotSearch()) {
             currentDirectoryFile.listFiles()?.filter {
                 wayOfSearching.fileNameMatches(it)
-            }?.sortedWith(komparator) ?: listOf()
+            }?.sortedWith(comparator) ?: listOf()
         } else {
             getAllFilesFromCurrentDirectorySorted()
         }

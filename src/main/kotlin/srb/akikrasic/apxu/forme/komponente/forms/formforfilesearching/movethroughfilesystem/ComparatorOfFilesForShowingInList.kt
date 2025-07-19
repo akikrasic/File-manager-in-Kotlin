@@ -1,9 +1,9 @@
-package srb.akikrasic.apxu.fajlsistem
+package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem
 
 import java.io.File
 import java.util.Comparator
 
-class Komparator: Comparator<File> {
+class ComparatorOfFilesForShowingInList: Comparator<File> {
     override fun compare(o1: File?, o2: File?): Int {
 
         if(o1!!.isDirectory){
