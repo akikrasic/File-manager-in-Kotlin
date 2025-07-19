@@ -4,7 +4,7 @@ import srb.akikrasic.apxu.forme.komponente.ListaRenderer
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.FormForFileSearchingInMultipleDirectories
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners.ShowDirectoryContentInListMouseListener
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.models.DirectoryListModel
-import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.NovoKretanjeKrozDirektorijum
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.MovingThroughFileSystem
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
 import java.awt.Desktop
@@ -29,7 +29,7 @@ class ShowDirectoryContentInList(val formFileSearchingInMultipleDirectories: For
     val listForShowingDirectoryContent = JList<File>()
     val scrollList = JScrollPane(listForShowingDirectoryContent)
 
-    val kretanjeKrozDirektorijum = NovoKretanjeKrozDirektorijum(putanja)
+    val kretanjeKrozDirektorijum = MovingThroughFileSystem(putanja)
 
     init{
         layout = GridBagLayout()
@@ -82,7 +82,7 @@ class ShowDirectoryContentInList(val formFileSearchingInMultipleDirectories: For
 
     private fun putListOfFilesIntoJListForShowing(l:List<File>){
         listForShowingDirectoryContent.model = DirectoryListModel(l)
-        showCurrentDirectoryLabel.text = kretanjeKrozDirektorijum.trenutnaApsolutnaPutanja()
+        showCurrentDirectoryLabel.text = kretanjeKrozDirektorijum.currentAbsolutePath()
     }
 
     private fun goToPreviousDirectory(){
