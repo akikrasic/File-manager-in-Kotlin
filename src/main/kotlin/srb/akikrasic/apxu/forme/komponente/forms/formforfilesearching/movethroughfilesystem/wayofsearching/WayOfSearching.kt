@@ -2,7 +2,7 @@ package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethrou
 
 import java.io.File
 
-abstract class WayOfSearching(open val forSearch:String) {
+abstract class WayOfSearching(open val forSearch: String) {
     abstract fun fileNameMatches(file: File): Boolean
-    fun shouldNotSearch() = forSearch.trim()==""
+    fun shouldNotSearch() = forSearch.trim() == ""
 }

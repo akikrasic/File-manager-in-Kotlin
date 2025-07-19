@@ -4,7 +4,7 @@ import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels.Ent
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
 
-class SearchTextFieldListener(val enterTextForSearchingPanel: EnterTextForSearchingPanel): KeyListener {
+class SearchTextFieldListener(val enterTextForSearchingPanel: EnterTextForSearchingPanel) : KeyListener {
     override fun keyTyped(e: KeyEvent?) {
     }
 
@@ -12,14 +12,6 @@ class SearchTextFieldListener(val enterTextForSearchingPanel: EnterTextForSearch
     }
 
     override fun keyReleased(e: KeyEvent?) {
-//        val s = enterTextForSearchingPanel.textForSearching()
-//        if(s!=""){
-//
-//            enterTextForSearchingPanel.formForFileSearchingInMultipleDirectories.searchRegex(Regex(s, RegexOption.IGNORE_CASE))
-//        }
-//        else{
-//            enterTextForSearchingPanel.formForFileSearchingInMultipleDirectories.emptyString()
-//        }
         enterTextForSearchingPanel.search()
     }
 

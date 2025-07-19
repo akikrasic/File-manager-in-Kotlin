@@ -7,22 +7,15 @@ import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.models.Dir
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.MovingThroughFileSystem
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
-import java.awt.Desktop
-import java.awt.GridBagConstraints
-import java.awt.GridBagLayout
-import java.awt.Insets
-import java.awt.Point
+import java.awt.*
 import java.awt.event.ActionListener
 import java.io.File
-import javax.swing.JButton
-import javax.swing.JLabel
-import javax.swing.JList
-import javax.swing.JMenuItem
-import javax.swing.JPanel
-import javax.swing.JPopupMenu
-import javax.swing.JScrollPane
+import javax.swing.*
 
-class ShowDirectoryContentInList(val formFileSearchingInMultipleDirectories: FormForFileSearchingInMultipleDirectories, putanja:String = "/") : JPanel(){
+class ShowDirectoryContentInList(
+    val formFileSearchingInMultipleDirectories: FormForFileSearchingInMultipleDirectories,
+    putanja: String = "/"
+) : JPanel() {
     val currentDirectoryTitleLabel = JLabel("Тренутни директоријум")
     val showCurrentDirectoryLabel = JLabel(putanja)
     val backJButton = JButton("Назад")
@@ -31,7 +24,7 @@ class ShowDirectoryContentInList(val formFileSearchingInMultipleDirectories: For
 
     val kretanjeKrozDirektorijum = MovingThroughFileSystem(putanja)
 
-    init{
+    init {
         layout = GridBagLayout()
         val c = GridBagConstraintsCreator.createGridBagConstraints()
         c.insets = Insets(5, 5, 5, 5)
@@ -48,51 +41,53 @@ class ShowDirectoryContentInList(val formFileSearchingInMultipleDirectories: For
                 add(it, c)
                 c.gridy++
             }
-        c.weighty=0.8
+        c.weighty = 0.8
         add(scrollList, c)
 
     }
 
-    fun fileIsChosenInList(){
+    fun fileIsChosenInList() {
         val f = listForShowingDirectoryContent.selectedValue ?: File("/")
 
-        if(f.isDirectory){
+        if (f.isDirectory) {
             openDirectoryAndShow(f)
-        }
-        else{
+        } else {
             Desktop.getDesktop().open(f)
         }
     }
 
-    fun showPopupMenu(x:Int, y:Int){
+    fun showPopupMenu(x: Int, y: Int) {
 
         val menu = JPopupMenu()
         val item = JMenuItem("Додајте")
-        val el = listForShowingDirectoryContent.model.getElementAt(listForShowingDirectoryContent.locationToIndex(
-            Point(x, y)
-        ))
+        val el = listForShowingDirectoryContent.model.getElementAt(
+            listForShowingDirectoryContent.locationToIndex(
+                Point(x, y)
+            )
+        )
         menu.add(item)
-        item.addActionListener{event->
+        item.addActionListener { event ->
             formFileSearchingInMultipleDirectories.addNewDirectory(el.absolutePath)
         }
-        if( el.isDirectory) {
+        if (el.isDirectory) {
             menu.show(listForShowingDirectoryContent, x, y)
         }
     }
 
-    private fun putListOfFilesIntoJListForShowing(l:List<File>){
+    private fun putListOfFilesIntoJListForShowing(l: List<File>) {
         listForShowingDirectoryContent.model = DirectoryListModel(l)
         showCurrentDirectoryLabel.text = kretanjeKrozDirektorijum.currentAbsolutePath()
     }
 
-    private fun goToPreviousDirectory(){
-        putListOfFilesIntoJListForShowing( kretanjeKrozDirektorijum.returnToPreviousDirectoryAndReturnHisFiles() )
+    private fun goToPreviousDirectory() {
+        putListOfFilesIntoJListForShowing(kretanjeKrozDirektorijum.returnToPreviousDirectoryAndReturnHisFiles())
     }
 
-    fun search(wayOfSearching: WayOfSearching){
+    fun search(wayOfSearching: WayOfSearching) {
         putListOfFilesIntoJListForShowing(kretanjeKrozDirektorijum.search(wayOfSearching))
     }
-    fun openDirectoryAndShow(directory:File){
+
+    fun openDirectoryAndShow(directory: File) {
         putListOfFilesIntoJListForShowing(kretanjeKrozDirektorijum.goToDirectoryAndReturnItsFiles(directory))
     }
 

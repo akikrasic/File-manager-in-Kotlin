@@ -5,14 +5,14 @@ import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.FormForFil
 import java.awt.event.WindowEvent
 import java.awt.event.WindowListener
 
-class SaveDirectoriesForNextStartListener (val formForFileSearchingInMultipleDirectories: FormForFileSearchingInMultipleDirectories):
+class SaveDirectoriesForNextStartListener(val formForFileSearchingInMultipleDirectories: FormForFileSearchingInMultipleDirectories) :
     WindowListener {
     override fun windowOpened(e: WindowEvent?) {
 
     }
 
     override fun windowClosing(e: WindowEvent?) {
-        PocetnePutanje.sacuvajtePutanjeZaSledeciPut(formForFileSearchingInMultipleDirectories.showDirectoriesPanelsList.map{it.kretanjeKrozDirektorijum.currentDirectoryString})
+        PocetnePutanje.sacuvajtePutanjeZaSledeciPut(formForFileSearchingInMultipleDirectories.showDirectoriesPanelsList.map { it.kretanjeKrozDirektorijum.currentDirectoryString })
     }
 
     override fun windowClosed(e: WindowEvent?) {
