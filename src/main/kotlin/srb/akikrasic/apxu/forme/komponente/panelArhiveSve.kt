@@ -35,8 +35,8 @@ class PanelArhiveSve(val forma: Forma): PanelZajednicki(){
         rasporediteKomponentu(listaSvihArhiva,0,40,200,600)
     }
 
-    override fun vratiteMapu(): Map<String, String> = JezikServis.odabraniJezik().panelArhiveSve()
-    override fun ucitajteJezikUPanel(mapa:Map<String, String>) {
+    override fun returnLanguageMap(): Map<String, String> = JezikServis.odabraniJezik().panelArhiveSve()
+    override fun loadLanguageIntoTheForm(mapa:Map<String, String>) {
             labelaNaslov.text=mapa["labelaNaslov"]
     }
     private fun dogadjaji(){

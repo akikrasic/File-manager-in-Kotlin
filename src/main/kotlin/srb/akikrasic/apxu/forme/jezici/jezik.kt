@@ -1,10 +1,7 @@
 package srb.akikrasic.apxu.forme.jezici
 
 import srb.akikrasic.apxu.forme.Forma
-import srb.akikrasic.apxu.forme.FormaZajednicka
 import srb.akikrasic.apxu.forme.greske.Greske
-import srb.akikrasic.apxu.forme.komponente.PrikazDirektorijumaLista
-import srb.akikrasic.apxu.podaci.Podaci
 
 abstract class Jezik{
     protected fun mapa():HashMap<String, String>{
@@ -55,10 +52,10 @@ abstract class Jezik{
 
 }
 interface PromenaJezika{
-    fun ucitajteJezikUPanel(mapa:Map<String, String>)
-    fun vratiteMapu():Map<String, String>
+    fun loadLanguageIntoTheForm(mapa:Map<String, String>)
+    fun returnLanguageMap():Map<String, String>
     fun ucitajteJezik(){
-        ucitajteJezikUPanel(vratiteMapu())
+        loadLanguageIntoTheForm(returnLanguageMap())
     }
     fun promeniteJezik(){
         ucitajteJezik()

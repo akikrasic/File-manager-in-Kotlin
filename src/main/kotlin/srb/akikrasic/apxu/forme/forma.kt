@@ -26,12 +26,12 @@ class Forma : JFrame(), PromenaJezika {
      val panelArhiveSve = PanelArhiveSve(this)
      val panelPrikazFajla = PanelPrikazFajla(this)
 
-    override fun ucitajteJezikUPanel(mapa: Map<String, String>) {
+    override fun loadLanguageIntoTheForm(mapa: Map<String, String>) {
         title=mapa["naslov"]
         meni.meniJezik(mapa)
     }
 
-    override fun vratiteMapu(): HashMap<String, String>  = JezikServis.odabraniJezik().forma()
+    override fun returnLanguageMap(): HashMap<String, String>  = JezikServis.odabraniJezik().forma()
 
 
     override fun promeniteJezik(){

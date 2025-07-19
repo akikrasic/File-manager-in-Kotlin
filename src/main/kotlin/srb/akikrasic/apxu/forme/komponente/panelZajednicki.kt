@@ -33,11 +33,11 @@ import javax.swing.JPanel
         add(komponenta)
     }
 
-     open override fun ucitajteJezikUPanel(mapa: Map<String, String>) {
+     open override fun loadLanguageIntoTheForm(mapa: Map<String, String>) {
 
      }
 
-     override fun vratiteMapu(): Map<String, String> {
+     override fun returnLanguageMap(): Map<String, String> {
          return HashMap<String, String>()
      }
 
