@@ -20,7 +20,7 @@ repositories {
 dependencies {
     implementation('com.formdev:flatlaf:1.2')
     implementation('org.jetbrains.kotlin:kotlin-stdlib:2.1.0')
-
+    implementation("org.yaml:snakeyaml:2.4")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
 
