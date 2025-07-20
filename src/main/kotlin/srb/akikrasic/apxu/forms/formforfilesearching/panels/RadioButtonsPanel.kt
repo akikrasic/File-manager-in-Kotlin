@@ -1,0 +1,48 @@
+package srb.akikrasic.apxu.forms.formforfilesearching.panels
+
+
+import srb.akikrasic.apxu.forms.formforfilesearching.listeners.RadioButtonSelectedListener
+import srb.akikrasic.apxu.forms.util.GridBagConstraintsCreator
+import srb.akikrasic.apxu.language.LanguageInterface
+import java.awt.GridBagLayout
+import javax.swing.ButtonGroup
+import javax.swing.JPanel
+import javax.swing.JRadioButton
+
+class RadioButtonsPanel(val enterTextForSearchingPanel: EnterTextForSearchingPanel) : JPanel(), LanguageInterface {
+    val wholeStringRB = JRadioButton("Претражите са целим стрингом")
+    val changeWhiteSpaceWithDotAnyRB = JRadioButton("Регекс претрага празан стринг у било шта")
+    val putDotAnyAfterEveryLetterRB = JRadioButton("Регекс претрага било шта после сваког слова")
+    val groupOfButtons = ButtonGroup()
+
+    init {
+        val c = GridBagConstraintsCreator.createGridBagConstraints()
+        layout = GridBagLayout()
+        groupOfButtons.add(wholeStringRB)
+        groupOfButtons.add(changeWhiteSpaceWithDotAnyRB)
+        groupOfButtons.add(putDotAnyAfterEveryLetterRB)
+        wholeStringRB.isSelected = true
+
+        add(wholeStringRB, c)
+        c.gridx = 1
+        add(changeWhiteSpaceWithDotAnyRB, c)
+        c.gridx = 2
+        add(putDotAnyAfterEveryLetterRB, c)
+        wholeStringRB.addItemListener(RadioButtonSelectedListener(0, this))
+        changeWhiteSpaceWithDotAnyRB.addItemListener(RadioButtonSelectedListener(1, this))
+        putDotAnyAfterEveryLetterRB.addItemListener(RadioButtonSelectedListener(2, this))
+    }
+
+    fun selectionChanged(number: Int) {
+        enterTextForSearchingPanel.changedWayOfSearching(number)
+    }
+
+    override fun setTranslations(translations: Map<String, String>) {
+        wholeStringRB.text = translations.get("wholeStringRB")
+        changeWhiteSpaceWithDotAnyRB.text = translations.get("changeWhiteSpaceWithDotAnyRB")
+        putDotAnyAfterEveryLetterRB.text = translations.get("putDotAnyAfterEveryLetterRB")
+
+    }
+
+
+}
