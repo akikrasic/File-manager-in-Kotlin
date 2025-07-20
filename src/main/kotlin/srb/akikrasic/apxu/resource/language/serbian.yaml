@@ -1,0 +1,17 @@
+FormForFileSearchingInMultipleDirectories:
+  title: "Претрага у више директоријума"
+RadioButtonsPanel:
+  wholeStringRB: "Претражите са целим стрингом"
+  changeWhiteSpaceWithDotAnyRB: "Регекс претрага празан стринг у .*"
+  putDotAnyAfterEveryLetterRB: "Регекс претрага .* после сваког слова"
+EnterTextForSearchingPanel:
+  searchTextLabel: "Унесите текст за претрагу у директоријумима:"
+ShowDirectoryContentInList:
+  currentDirectoryTitleLabel: "Тренутни директоријум"
+  backJButton: "Назад"
+MenuForFormForFileSearchingInMultipleDirectories:
+  firstMenu: "Мени"
+  addNewDirectoryForSearchButton: "Додајте нови директоријум"
+  languagesMenu: "Језици"
+  serbianLanguage: "Србски"
+  englishLanguage: "Енглески"

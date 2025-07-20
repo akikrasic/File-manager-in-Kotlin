@@ -1,40 +1,35 @@
 package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching
 
 import srb.akikrasic.apxu.fajlsistem.PocetnePutanje
-import srb.akikrasic.apxu.forme.jezici.JezikServis
-import srb.akikrasic.apxu.forme.jezici.PromenaJezika
 import srb.akikrasic.apxu.forme.komponente.forms.Form
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners.SaveDirectoriesForNextStartListener
+import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.menu.MenuForFormForFileSearchingInMultipleDirectories
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels.EnterTextForSearchingPanel
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels.ShowDirectoryContentInList
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
-import javax.swing.*
+import javax.swing.JPanel
+import javax.swing.JSplitPane
 
-class FormForFileSearchingInMultipleDirectories : Form(), PromenaJezika {
+class FormForFileSearchingInMultipleDirectories : Form() {
 
     val enterTextForSearchingPanel = EnterTextForSearchingPanel(this)
     val showDirectoriesPanelsList = mutableListOf<ShowDirectoryContentInList>()
     val panelForJSplitPanes = JPanel()
     var screenWidth = 0
-
-    override fun loadLanguageIntoTheForm(map: Map<String, String>) {
-        title = map["naslov"]
-    }
-
-    override fun returnLanguageMap(): Map<String, String> = JezikServis.odabraniJezik().forma2()
-
+    val menuForFormForFileSearchingInMultipleDirectories = MenuForFormForFileSearchingInMultipleDirectories(this)
 
     init {
-
+        translateComponent()
         showDirectoriesPanelsList.addAll(PocetnePutanje.ucitajtePocetnePutanje().map {
             ShowDirectoryContentInList(
                 this,
                 it
             )
         })
+
         //ajde pisem sve opet cisto da se podsetim iako vec imam taj kod skoro sve
         this.defaultCloseOperation = EXIT_ON_CLOSE
         val screenDimensions = toolkit.screenSize.size
@@ -69,24 +64,7 @@ class FormForFileSearchingInMultipleDirectories : Form(), PromenaJezika {
     }
 
     private fun addMenu() {
-        val menuBar = JMenuBar()
-        val meni = JMenu("Мени")
-        menuBar.add(meni)
-        val addNewDirectoryForSearchButton = JMenuItem("Додајте")
-        meni.add(addNewDirectoryForSearchButton)
-        addNewDirectoryForSearchButton.addActionListener { e ->
-            val dialog = JFileChooser()
-
-            dialog.fileSelectionMode = JFileChooser.DIRECTORIES_ONLY
-            val result = dialog.showOpenDialog(null)
-            if (result == JFileChooser.APPROVE_OPTION) {
-                // println(dialog.selectedFile)
-                addNewDirectory(dialog.selectedFile.absolutePath)
-            }
-
-        }
-
-        jMenuBar = menuBar
+        jMenuBar = menuForFormForFileSearchingInMultipleDirectories
     }
 
     fun addNewDirectory(pathToNewDirectory: String) {
@@ -152,5 +130,14 @@ class FormForFileSearchingInMultipleDirectories : Form(), PromenaJezika {
             it.search(wayOfSearching)
         }
     }
+
+    override fun setTranslations(translations: Map<String, String>) {
+        title = translations["title"] ?: "kompir"
+        enterTextForSearchingPanel.translateComponent()
+        showDirectoriesPanelsList.forEach { it.translateComponent() }
+        menuForFormForFileSearchingInMultipleDirectories.translateComponent()
+    }
+
+
 
 }

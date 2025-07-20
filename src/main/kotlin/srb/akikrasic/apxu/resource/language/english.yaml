@@ -1,0 +1,17 @@
+FormForFileSearchingInMultipleDirectories:
+  title: "File searching in multiple directories"
+RadioButtonsPanel:
+  wholeStringRB: "Search with string"
+  changeWhiteSpaceWithDotAnyRB: "Regex: Empty space becomes .*"
+  putDotAnyAfterEveryLetterRB: "Regex: .* after every letter"
+EnterTextForSearchingPanel:
+  searchTextLabel: "Text for search in directories:"
+ShowDirectoryContentInList:
+  currentDirectoryTitleLabel: "Current directory"
+  backJButton: "Back"
+MenuForFormForFileSearchingInMultipleDirectories:
+  firstMenu: "Menu"
+  addNewDirectoryForSearchButton: "Add new directory"
+  languagesMenu: "Languages"
+  serbianLanguage: "Serbian"
+  englishLanguage: "English"

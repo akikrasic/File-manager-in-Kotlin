@@ -7,6 +7,7 @@ import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroug
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WholeStringWayOfSearching
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
+import srb.akikrasic.apxu.language.LanguageInterface
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
@@ -15,8 +16,8 @@ import javax.swing.JPanel
 import javax.swing.JTextField
 
 class EnterTextForSearchingPanel(val formForFileSearchingInMultipleDirectories: FormForFileSearchingInMultipleDirectories) :
-    JPanel() {
-    val searchTextLabel = JLabel("Унесите текст за претрагу у директоријумима:")
+    JPanel(), LanguageInterface {
+    val searchTextLabel = JLabel("")
     val searchTextField = JTextField()
     val radioButtonGroups = RadioButtonsPanel(this)
     val constructors = arrayOf(
@@ -54,6 +55,11 @@ class EnterTextForSearchingPanel(val formForFileSearchingInMultipleDirectories: 
     fun changedWayOfSearching(number: Int) {
         selectedWayOfSearching = number
         search()
+    }
+
+    override fun setTranslations(translations: Map<String, String>) {
+        searchTextLabel.text = translations.get("searchTextLabel")
+        radioButtonGroups.translateComponent()
     }
 
 }

@@ -7,6 +7,7 @@ import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.models.Dir
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.MovingThroughFileSystem
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
+import srb.akikrasic.apxu.language.LanguageInterface
 import java.awt.*
 import java.io.File
 import javax.swing.*
@@ -14,10 +15,10 @@ import javax.swing.*
 class ShowDirectoryContentInList(
     val formFileSearchingInMultipleDirectories: FormForFileSearchingInMultipleDirectories,
     putanja: String = "/"
-) : JPanel() {
-    val currentDirectoryTitleLabel = JLabel("Тренутни директоријум")
+) : JPanel(), LanguageInterface {
+    val currentDirectoryTitleLabel = JLabel("")
     val showCurrentDirectoryLabel = JLabel(putanja)
-    val backJButton = JButton("Назад")
+    val backJButton = JButton("")
     val listForShowingDirectoryContent = JList<File>()
     val scrollList = JScrollPane(listForShowingDirectoryContent)
 
@@ -42,7 +43,7 @@ class ShowDirectoryContentInList(
             }
         c.weighty = 0.8
         add(scrollList, c)
-
+        translateComponent()
     }
 
     fun fileIsChosenInList() {
@@ -88,6 +89,11 @@ class ShowDirectoryContentInList(
 
     fun openDirectoryAndShow(directory: File) {
         putListOfFilesIntoJListForShowing(kretanjeKrozDirektorijum.goToDirectoryAndReturnItsFiles(directory))
+    }
+
+    override fun setTranslations(translations: Map<String, String>) {
+        currentDirectoryTitleLabel.text = translations.get("currentDirectoryTitleLabel")
+        backJButton.text = translations.get("backJButton")
     }
 
 

@@ -2,12 +2,13 @@ package srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.panels
 
 import srb.akikrasic.apxu.forme.komponente.forms.formforfilesearching.listeners.RadioButtonSelectedListener
 import srb.akikrasic.apxu.forme.komponente.forms.util.GridBagConstraintsCreator
+import srb.akikrasic.apxu.language.LanguageInterface
 import java.awt.GridBagLayout
 import javax.swing.ButtonGroup
 import javax.swing.JPanel
 import javax.swing.JRadioButton
 
-class RadioButtonsPanel(val enterTextForSearchingPanel: EnterTextForSearchingPanel) : JPanel() {
+class RadioButtonsPanel(val enterTextForSearchingPanel: EnterTextForSearchingPanel) : JPanel(), LanguageInterface {
     val wholeStringRB = JRadioButton("Претражите са целим стрингом")
     val changeWhiteSpaceWithDotAnyRB = JRadioButton("Регекс претрага празан стринг у било шта")
     val putDotAnyAfterEveryLetterRB = JRadioButton("Регекс претрага било шта после сваког слова")
@@ -33,6 +34,13 @@ class RadioButtonsPanel(val enterTextForSearchingPanel: EnterTextForSearchingPan
 
     fun selectionChanged(number: Int) {
         enterTextForSearchingPanel.changedWayOfSearching(number)
+    }
+
+    override fun setTranslations(translations: Map<String, String>) {
+        wholeStringRB.text = translations.get("wholeStringRB")
+        changeWhiteSpaceWithDotAnyRB.text = translations.get("changeWhiteSpaceWithDotAnyRB")
+        putDotAnyAfterEveryLetterRB.text = translations.get("putDotAnyAfterEveryLetterRB")
+
     }
 
 
