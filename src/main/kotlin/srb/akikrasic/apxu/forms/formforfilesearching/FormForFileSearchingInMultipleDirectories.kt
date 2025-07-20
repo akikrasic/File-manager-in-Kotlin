@@ -1,14 +1,13 @@
 package srb.akikrasic.apxu.forms.formforfilesearching
 
-import srb.akikrasic.apxu.fajlsistem.PocetnePutanje
 import srb.akikrasic.apxu.forms.Form
 import srb.akikrasic.apxu.forms.formforfilesearching.listeners.SaveDirectoriesForNextStartListener
 import srb.akikrasic.apxu.forms.formforfilesearching.menu.MenuForFormForFileSearchingInMultipleDirectories
+import srb.akikrasic.apxu.forms.formforfilesearching.movethroughfilesystem.StartingPaths
 import srb.akikrasic.apxu.forms.formforfilesearching.movethroughfilesystem.wayofsearching.WayOfSearching
 import srb.akikrasic.apxu.forms.formforfilesearching.panels.EnterTextForSearchingPanel
 import srb.akikrasic.apxu.forms.formforfilesearching.panels.ShowDirectoryContentInList
 import srb.akikrasic.apxu.forms.util.GridBagConstraintsCreator
-
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import javax.swing.JPanel
@@ -24,7 +23,7 @@ class FormForFileSearchingInMultipleDirectories : Form() {
 
     init {
         translateComponent()
-        showDirectoriesPanelsList.addAll(PocetnePutanje.ucitajtePocetnePutanje().map {
+        showDirectoriesPanelsList.addAll(StartingPaths.loadStartingPaths().map {
             ShowDirectoryContentInList(
                 this,
                 it
