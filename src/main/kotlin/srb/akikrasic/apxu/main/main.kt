@@ -1,4 +1,4 @@
-package srb.akikrasic.apxu.glavna
+package srb.akikrasic.apxu.main
 
 import com.formdev.flatlaf.FlatLightLaf
 import srb.akikrasic.apxu.fajlsistem.PocetnePutanje
