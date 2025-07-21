@@ -9,7 +9,7 @@ class PutDotAnyAfterEveryLetterWayOfSearching(override val forSearch: String) :
         for (c in super.forSearch) {
             if (c.isWhitespace()) {
                 sb.append(".*")
-            } else sb.append(c).append(".*")
+            } else sb.append(c.uppercase()).append(".*")
         }
         return Regex(sb.toString())
     }
