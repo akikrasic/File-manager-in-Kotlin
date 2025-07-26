@@ -1,17 +1,16 @@
 package srb.akikrasic.apxu.forms.formforfilesearching.movethroughfilesystem.wayofsearching
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.io.File
 
-class PutDotAnyAfterEveryLetterWayOfSearchingTest {
-    val forSearch = "abcd"
+class PutDotAnyAfterEveryLetterWayOfSearchingTest() {
+    val forSearch = "a bcd"
     val p = PutDotAnyAfterEveryLetterWayOfSearching(forSearch)
 
     @Test
-    fun testcreateRegex() {
-        val expected = ".*a.*b.*c.*d.*"
+    fun testCreateRegex() {
+        val expected = ".*A.*.*B.*C.*D.*"
         assertEquals(expected, p.regex.pattern)
     }
 
@@ -22,6 +21,6 @@ class PutDotAnyAfterEveryLetterWayOfSearchingTest {
 
     @Test
     fun testRegexFailing() {
-
+        assertFalse(p.fileNameMatches(File("test")))
     }
 }
