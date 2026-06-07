@@ -10,7 +10,7 @@ class MovingThroughFileSystem(var currentDirectoryString: String = "/") {
     var currentWayOfSearching: WayOfSearching = WholeStringWayOfSearching("")
 
     fun setCurrentDirectoryStringAndFileFromFile(directory: File) {
-        currentDirectoryString = directory.name
+        currentDirectoryString = directory.absolutePath
         currentDirectoryFile = directory
     }
 
